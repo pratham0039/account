@@ -131,16 +131,15 @@ def udhaar(request):
 	
 
 def home(request):
-	records = Record.objects.all()
-	labs = LabDeposit.objects.all()
+	records = Record.objects.filter(lab="Ashish_Lab")
+	
 	total_credited=0
 	total_debited=0
 	for record in records:
 		total_credited += record.total_price
-		if record.paid=="paid" and record.lab=="lab3":
+		if record.paid=="paid":
 			total_debited+= record.total_price	
-	for lab in labs:
-		total_debited += lab.deposit
+	
 	# Check to see if logging in
 	if request.method == 'POST':
 		username = request.POST['username']
@@ -334,11 +333,7 @@ def search_records(request):
     query = request.GET.get('query')
 
     if query:
-        records = Record.objects.filter(first_name__icontains=query) | \
-                  Record.objects.filter(last_name__icontains=query) | \
-                  Record.objects.filter(phone__icontains=query) | \
-                  Record.objects.filter(lab__icontains=query) | \
-                  Record.objects.filter(paid__icontains=query)
+        records = Record.objects.filter(first_name__icontains=query)
     else:
         records = Record.objects.all()
 
