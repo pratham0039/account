@@ -11,12 +11,7 @@
 
     <h1>Labs</h1>
 
-    <form method="post">
-      {% csrf_token %}
-      <label for="deposit">Deposit Amount:</label>
-      <input type="text" name="label" id="label" required>
-      <button type="submit">Submit</button>
-    </form>
+
     <ul>
         {% for lab in labs %}
             <li><a href="{% url 'lab_records' lab=lab %}">{{ lab }}</a></li>
