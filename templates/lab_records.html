@@ -2,22 +2,33 @@
 
 {% block content %}
 
-
-
+{% load static %}
 {% if user.is_authenticated %}
 
 
 {% if records %}
 {% regroup records by created_at|date:"Y-m" as grouped_records %}
-    <h1>Add Deposit</h1>
+    
     <form method="post" action="{% url 'add_deposit' lab=lab %}">
         {% csrf_token %}
         <label for="deposit">Deposit Amount:</label>
         <input type="number" name="deposit" id="deposit" required>
         <button type="submit">Submit</button>
     </form>
-<p>Current Deposit: {{ deposit }}</p>
-<p>Current Credited: {{ credited }}</p>
+
+<div class="container" style="display: flex; justify-content: space-between;">
+    <div class="card" style="background-color: rgb(224, 19, 36); margin: 10px;">
+        <p style="margin: 15px; color: white;" >Current Credited: {{ credited }}</p>
+
+    </div>
+    <div class="card" style="background-color: blue; margin: 10px; padding: 10pxs;">
+        <p style="margin: 15px; color: white;">Current Deposit: {{ deposit }}</p>
+    </div>
+    
+    
+
+</div>
+
 
 
     {% for group in grouped_records reversed %}
@@ -26,7 +37,7 @@
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Phone</th>
+                    
                     <th scope="col">Lab</th>
                     <th scope="col">Total Price</th>
                     <th scope="col">Paid</th>
@@ -37,7 +48,7 @@
                 {% for record in group.list reversed %}
                     <tr>
                         <td><a href="{% url 'record' record.id %}">{{ record.first_name }} {{ record.last_name }}</a></td>
-                        <td>{{ record.phone }}</td>
+                        
                         <td>{{ record.lab }}</td>
                         <td>{{ record.total_price }}</td>
                         <td>{{ record.paid }}</td>
