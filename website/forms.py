@@ -45,10 +45,10 @@ class AddRecordForm(forms.ModelForm):
     
     total_price = forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Price For Customer", "class":"form-control"}), label="")
     lab_choices = [
-        ('lab1', 'Lab 1'),
-        ('lab2', 'Lab 2'),
-        ('lab3', 'Lab 3'),
-        ('lab4', 'Lab 4'),
+        ('Ashish_Lab', 'Ashish_Lab'),
+        ('City_Lab', 'City_Lab'),
+        ('Public_Lab', 'Public_Lab'),
+        ('Modern_Lab', 'Modern_Lab'),
         ('lab5', 'Lab 5')
     ]
     lab = forms.ChoiceField(choices=lab_choices, widget=forms.Select(attrs={"class": "form-control"}), required=True, label="Lab")
